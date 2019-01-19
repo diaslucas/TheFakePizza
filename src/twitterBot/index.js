@@ -2,7 +2,7 @@ import Twit from 'twit'
 import { TWITTER_CONSUMER_KEY, 
   TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET } from '../config'
 
-export default twitterBot = () => {
+export default () => {
 
   var T = new Twit({
     consumer_key: TWITTER_CONSUMER_KEY,
@@ -31,22 +31,21 @@ export default twitterBot = () => {
       console.log("Here's our menu");
       // Send menu link;
     }
-    
-    text = text.replace("i will have ", "");
-    text = text.replace("i'll have ", "");
+    // text = text.replace("i will have ", "");
+    // text = text.replace("i'll have ", "");
 
-    let splitTextByTheAddress = text.split(' the address is ');
-    let pizzas = splitTextByTheAddress[0];
-    let address = splitTextByTheAddress[1].replace(" the address is ", "");
+    // let splitTextByTheAddress = text.split(' the address is ');
+    // let pizzas = splitTextByTheAddress[0];
+    // let address = splitTextByTheAddress[1].replace(" the address is ", "");
 
-    let pizzasSplit = pizzas.split(',');
-    console.log(pizzas);
-    console.log(address);
+    // let pizzasSplit = pizzas.split(',');
+    // console.log(pizzas);
+    // console.log(address);
 
-    const from = tweet.user.name;
-    const tweetID = tweet.id_str;
+    // const from = tweet.user.name;
+    // const tweetID = tweet.id_str;
 
-    var newTweet = '@' + replyTo + ' Success!';
+    // var newTweet = '@' + replyTo + ' Success!';
     // tweetIt(newTweet, tweetID);
 
   })
