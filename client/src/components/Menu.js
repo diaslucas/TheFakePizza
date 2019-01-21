@@ -7,7 +7,7 @@ const Pizzas = () => (
   <Query
     query={gql`
     {
-      pizzas {
+      pizzas(orderBy: "flavor_ASC") {
         id
         flavor
         price

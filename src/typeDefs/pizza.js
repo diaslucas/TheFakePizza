@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
 extend type Query {
   pizza(id: ID!): Pizza
-  pizzas: [Pizza!]!
+  pizzas(orderBy: String): [Pizza!]!
 }
 
 extend type Mutation {
