@@ -1,5 +1,33 @@
 import React, { Component } from 'react'
 import { Table } from 'react-materialize'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+
+const Pizzas = () => (
+  <Query
+    query={gql`
+    {
+      pizzas {
+        id
+        flavor
+        price
+      }
+    }
+    `}
+  >
+    {({ loading, error, data }) => {
+      if (loading) return <p>Loading...</p>;
+      if (error) return <p>Error :(</p>;
+
+      return data.pizzas.map(({ id, flavor, price }) => (
+        <tr key={id}>
+          <td>{flavor}</td>
+          <td>${price}</td>
+        </tr>
+      ));
+    }}
+  </Query>
+);
 
 export default class Menu extends Component {
   render() {
@@ -13,20 +41,8 @@ export default class Menu extends Component {
               <th data-field="price">Price</th>
             </tr>
           </thead>
-
           <tbody>
-            <tr>
-              <td>Pepperoni</td>
-              <td>$9</td>
-            </tr>
-            <tr>
-              <td>Cheese</td>
-              <td>$9</td>
-            </tr>
-            <tr>
-              <td>Three Meat</td>
-              <td>$10</td>
-            </tr>
+            <Pizzas />
           </tbody>
         </Table>
       </React.Fragment>
