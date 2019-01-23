@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Row, Navbar, NavItem } from 'react-materialize'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home'
 import ApolloClient from "apollo-boost"
 import { ApolloProvider } from 'react-apollo'
+import AppNavBar from './components/AppNavBar';
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql"
@@ -13,15 +14,14 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <div>
-          <Row>
-            <Navbar brand='thefakepizza' className="orange darken-2" right>
-              <NavItem onClick={() => console.log('test click')}>All Orders</NavItem>
-              <NavItem href='components.html'>Hours</NavItem>
-            </Navbar>
-          </Row>
-          <Home />
-        </div>
+      <Router>
+        <React.Fragment>
+          <AppNavBar />
+          <Route exact path="/" component={Home} />
+          <Route path="/AllOrders" component={Home} />
+          <Route path="/Menu" component={Home} />
+        </React.Fragment>
+      </Router>
       </ApolloProvider>
     );
   }
