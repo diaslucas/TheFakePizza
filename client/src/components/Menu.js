@@ -33,7 +33,7 @@ export default class Menu extends Component {
   render() {
     return (
       <React.Fragment>
-        <h2 className="orange-text text-darken-2">Menu</h2>
+        <h2 className="orange-text text-darken-2">Popular Choices</h2>
         <Table centered={true}>
           <thead>
             <tr>

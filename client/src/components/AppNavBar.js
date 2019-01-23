@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
-import { Row, Navbar, NavItem } from 'react-materialize'
+import { Row, Col } from 'react-materialize'
 import { Link } from 'react-router-dom';
 
 export default class AppNavBar extends Component {
   render() {
     return (
-      <Row>
-        <Navbar brand='thefakepizza' className="orange darken-2" right>
-          <NavItem tag={Link} to="/AllOrders">All Orders</NavItem>
-          <NavItem tag={Link} to="/Menu">Menu</NavItem>
-        </Navbar>
-      </Row>
+      <nav className="orange darken-2">
+        <div className="nav-wrapper">
+          <Link to="/" className="brand-logo" style={{ marginLeft: 20 }}>thefakepizza</Link>
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li><Link to="/AllOrders">All Orders</Link></li>
+            <li><Link to="/Menu">Menu</Link></li>
+          </ul>
+        </div>
+      </nav>
     )
   }
 }
+
+
+
