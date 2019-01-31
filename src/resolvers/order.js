@@ -13,7 +13,26 @@ export default {
       }
 
       return Order.findById(id)
-    }
+    },
+    popularChoices: async (root, args, context, info) => {
+      const aggregatorOpts = [{
+        $unwind: "$pizzas"
+      },
+      {
+        $group: {
+          _id: "$pizzas.flavor",
+          count: { $sum: "$pizzas.quantity" }
+        },
+      },
+      {
+        $sort: {
+          count: -1
+        }
+      }
+      ]
+
+      return await Order.aggregate(aggregatorOpts).exec().then((pizzas) => pizzas)
+    },
   },
   Mutation: {
     addOrder: (root, args, context, info) => {

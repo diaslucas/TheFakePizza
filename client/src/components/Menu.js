@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Table } from 'react-materialize'
+import { Container, Table } from 'react-materialize'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import Row from 'react-materialize/lib/Row';
+import Col from 'react-materialize/lib/Col';
 
 const Pizzas = () => (
   <Query
@@ -16,8 +18,8 @@ const Pizzas = () => (
     `}
   >
     {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
+      if (loading) return <tr><td>Loading...</td></tr>;
+      if (error) return <tr><td>Error :(</td></tr>;
 
       return data.pizzas.map(({ id, flavor, price }) => (
         <tr key={id}>
@@ -32,20 +34,24 @@ const Pizzas = () => (
 export default class Menu extends Component {
   render() {
     return (
-      <React.Fragment>
-        <h2 className="orange-text text-darken-2">Popular Choices</h2>
-        <Table centered={true}>
-          <thead>
-            <tr>
-              <th data-field="id">Pizza</th>
-              <th data-field="price">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <Pizzas />
-          </tbody>
-        </Table>
-      </React.Fragment>
+      <Container>
+        <Row>
+          <Col m={6} s={12}>
+            <h2 className="orange-text text-darken-2">Menu</h2>
+            <Table>
+              <thead>
+                <tr>
+                  <th data-field="id">Pizza</th>
+                  <th data-field="price">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <Pizzas />
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }

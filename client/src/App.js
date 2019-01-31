@@ -6,6 +6,8 @@ import ApolloClient from "apollo-boost"
 import { ApolloProvider } from 'react-apollo'
 import AppNavBar from './components/AppNavBar';
 import AllOrders from './components/AllOrders';
+import Banners from './components/Banners';
+import Menu from './components/Menu';
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql"
@@ -18,9 +20,10 @@ class App extends Component {
       <Router>
         <React.Fragment>
           <AppNavBar />
+          <Banners />
           <Route exact path="/" component={Home} />
           <Route path="/AllOrders" component={AllOrders} />
-          <Route path="/Menu" component={Home} />
+          <Route path="/Menu" component={Menu} />
         </React.Fragment>
       </Router>
       </ApolloProvider>

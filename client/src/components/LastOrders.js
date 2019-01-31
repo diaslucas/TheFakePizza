@@ -1,5 +1,42 @@
 import React, { Component } from 'react'
 import { Table } from 'react-materialize'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+
+const Orders = () => (
+  <Query
+    query={gql`
+    {
+      orders {
+        id,
+        pizzas {
+          flavor,
+          price
+        },
+        total,
+        customer,
+        status
+      }
+    }
+    `}
+  >
+    {({ loading, error, data }) => {
+      if (loading) return <tr><td>Loading...</td></tr>;
+      if (error) return <tr><td>Error :(</td></tr>;
+      var statusClass = '';
+
+      return data.orders.map(({ id, total, customer, status  }) => (
+        <tr key={id}>
+          <td>{customer}</td>
+          <td>${total}</td>
+          <td className={(status === 'Pending' ? 'light-blue-text' : 'light-green-text')} 
+          style={{fontWeight: 'bold'}}>{status}</td>
+        </tr>
+      ));
+    }}
+  </Query>
+);
+
 
 export default class LastOrders extends Component {
   render() {
@@ -9,27 +46,13 @@ export default class LastOrders extends Component {
         <Table centered={true}>
           <thead>
             <tr>
-              <th data-field="id">Ordered by</th>
-              <th data-field="price">Total</th>
-              <th data-field="price">Status</th>
+              <th data-field="customer">Ordered by</th>
+              <th data-field="total">Total</th>
+              <th data-field="status">Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Lucas</td>
-              <td>$9</td>
-              <td>Pending</td>
-            </tr>
-            <tr>
-              <td>Agatha</td>
-              <td>$19</td>
-              <td>Deliverd</td>
-            </tr>
-            <tr>
-              <td>Chris</td>
-              <td>$10</td>
-              <td>Delivered</td>
-            </tr>
+           <Orders />
           </tbody>
         </Table>
       </React.Fragment>

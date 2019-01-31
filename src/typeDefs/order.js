@@ -4,6 +4,12 @@ export default gql`
 extend type Query {
   order(id: ID!): Order
   orders: [Order!]!
+  popularChoices: [PopularChoices]
+}
+
+type PopularChoices {
+  _id: String,
+  count: Int
 }
 
 type PizzaOrder {
@@ -21,14 +27,13 @@ input PizzaInput {
 type Order {
   id: ID!
   pizzas: [PizzaOrder!]!
-  address: String!
   customer: String!
   total: Float!
   status: String!
 }
 
 extend type Mutation {
-  addOrder(pizzas: [PizzaInput!]!, address: String!, customer: String!, status: String!): Order
+  addOrder(pizzas: [PizzaInput!]!, customer: String!, status: String!): Order
 }
 
 `

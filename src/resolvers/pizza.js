@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { Pizza } from '../models'
+import { Pizza, Order } from '../models'
 import { UserInputError } from 'apollo-server-express'
 
 export default {
@@ -20,6 +20,7 @@ export default {
 
       return Pizza.findById(id)
     }
+
   },
   Mutation: {
     addPizza: (root, args, context, info) => {

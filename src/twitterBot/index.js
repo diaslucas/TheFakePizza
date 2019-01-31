@@ -19,18 +19,34 @@ export default () => {
 
   // Anytime someone tweets me
   stream.on('tweet', function (tweet) {
+    // console.log(tweet.user.profile_image_url);
     const replyTo = tweet.user.screen_name;
     let text = tweet.text.replace('@thefakepizza', '').toLowerCase();
     const currentDate = new Date();
     const isOpen = currentDate.getHours() < 20;
 
-    if (text.indexOf('menu')) {
-      if (!isOpen) {
-        console.log("Here's our menu but we are closed now");
-      }
-      console.log("Here's our menu");
-      // Send menu link;
+    // if (isOpen) {
+    // if (text.indexOf('menu')) {
+    //     console.log("Here's our menu but we are closed now");
+    //   }
+    //   console.log("Here's our menu, to order tweet: tweet model");
+    //   // Send menu link;
+    // }
+
+    var matchesPizzas = text.match(/\[(.*?)\]/);
+    if (matchesPizzas) {
+        var submatchPizzas = matchesPizzas[1];
+        console.log(submatchPizzas);
     }
+    
+    
+    var matchesAddress = text.match(/\{(.*?)\}/);
+    if (matchesAddress) {
+        var submatchAddress = matchesAddress[1];
+        console.log(submatchAddress);
+    }
+    
+
     // text = text.replace("i will have ", "");
     // text = text.replace("i'll have ", "");
 
