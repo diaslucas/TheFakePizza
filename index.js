@@ -9,12 +9,12 @@ import { DB, APP_PORT, IN_PROD } from './src/config'
 const app = express()
 
 // Initializing Bot
-twitterBot()
-
 mongoose.connect(
   DB,
   { useNewUrlParser: true }
 )
+
+twitterBot()
 
 app.disable('x-powered-by')
 
