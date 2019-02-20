@@ -9,11 +9,10 @@ export default class Home extends Component {
       <React.Fragment>
         <Container>
           <Row>
-            <Col m={5} s={12}>
+            <Col m={6} s={12}>
               <PopularChoices />
             </Col>
-            <Col m={2} s={12}></Col>
-            <Col m={5} s={12}>
+            <Col m={6} s={12}>
               <LastOrders />
             </Col>
           </Row>

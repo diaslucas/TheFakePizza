@@ -8,6 +8,7 @@ import AppNavBar from './components/AppNavBar';
 import AllOrders from './components/AllOrders';
 import Banners from './components/Banners';
 import Menu from './components/Menu';
+import Commands from './components/Commands';
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql"
@@ -24,6 +25,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/AllOrders" component={AllOrders} />
           <Route path="/Menu" component={Menu} />
+          <Route path="/Commands" component={Commands} />
         </React.Fragment>
       </Router>
       </ApolloProvider>

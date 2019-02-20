@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table } from 'react-materialize'
+import { Table, Icon } from 'react-materialize'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
@@ -32,7 +32,7 @@ export default class PopularChoices extends Component {
   render() {
     return (
       <React.Fragment>
-        <h2 className="orange-text text-darken-2">Popular Choices</h2>
+        <h2 className="orange-text text-darken-2">Popular Choices <Icon medium>star</Icon></h2>
         <Table centered={true}>
           <thead>
             <tr>

@@ -33,7 +33,7 @@ export default () => {
     
     var submatchPizzas = '';
     var matchesPizzas = text.match(/\[(.*?)\]/);
-    if (!isOpen) {
+    if (isOpen) {
       if (matchesPizzas) {
         submatchPizzas = matchesPizzas[1];
         var splitOrder = submatchPizzas.split(',');
@@ -43,34 +43,19 @@ export default () => {
         var orderedPizzas = await Promise.all(splitOrder.map(async (orderedPizza) => {
           const flavor = orderedPizza.trim().slice(2, orderedPizza.length);
           const quantity = parseInt(orderedPizza.trim().slice(0, 1));
-          return {
-            quantity: quantity,
-            flavor: flavor,
-            price: await GetPizzaPrice(flavor)
+          const price = await GetPizzaPrice(flavor);
+          if (price !== null) {
+            orderTotal += price * quantity;
+            return {
+              quantity: quantity,
+              flavor: flavor,
+              price: price
+            }
+          } else {
+            errorGettingPizza = true;
           }
         }))
 
-        console.log(orderedPizzas);
-
-        // splitOrder.forEach(async function (orderedPizza) {
-
-        //   pizza.quantity = parseInt(orderedPizza.trim().slice(0, 1));
-        //   pizza.flavor = orderedPizza.trim().slice(2, orderedPizza.length);
-        //   pizza.price = await GetOrderedPizza(pizza.flavor);
-        //   orderedPizzas.push(pizza);
-        //   orderTotal += pizza.quantity * pizza.price;
-          
-          // Pizza.findOne({ flavor: pizza.flavor }, (err, doc) => {
-          //   if (err) {
-          //     errorGettingPizza = true;
-          //   } else {
-          //     pizza.price = doc.price;
-          //     orderedPizzas.push(pizza);
-          //     orderTotal += pizza.quantity * pizza.price;
-          //   }
-          // })
-        // });
-        // console.log(orderedPizzas);
         if (errorGettingPizza) {
           replyText = 'Sorry! There was an error placing your order.';
         } else {
@@ -115,21 +100,13 @@ export default () => {
   }
 
   async function GetPizzaPrice(flavor) {
-    const pizza = await Pizza.findOne({ flavor }).select('price')
-    return pizza.price;
-  }
+    try {
+      const pizza = await Pizza.findOne({ flavor }).select('price');
+      return pizza.price;
+    } catch (error) {
+        return null;
+    }
 
-  async function GetOrder(splitOrder) {
-    var orderedPizzas = splitOrder.map(async orderedPizza => {
-      const flavor = orderedPizza.trim().slice(2, orderedPizza.length);
-      const quantity = parseInt(orderedPizza.trim().slice(0, 1));
-      return {
-        quantity: quantity,
-        flavor: flavor,
-        price: await GetPizzaPrice(flavor)
-      }
-    })
-    return orderedPizzas;
   }
 
 }

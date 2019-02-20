@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table } from 'react-materialize'
+import { Table, Icon } from 'react-materialize'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
@@ -13,8 +13,9 @@ const Orders = () => (
           flavor,
           price
         },
-        total,
         customer,
+        customerPhotoURL,
+        total,
         status
       }
     }
@@ -25,8 +26,9 @@ const Orders = () => (
       if (error) return <tr><td>Error :(</td></tr>;
       var statusClass = '';
 
-      return data.orders.map(({ id, total, customer, status  }) => (
+      return data.orders.map(({ id, total, customer, customerPhotoURL, status  }) => (
         <tr key={id}>
+          <td><img src={customerPhotoURL} className="circle responsive-img"/></td>
           <td>{customer}</td>
           <td>${total}</td>
           <td className={(status === 'Pending' ? 'light-blue-text' : 'light-green-text')} 
@@ -42,10 +44,11 @@ export default class LastOrders extends Component {
   render() {
     return (
       <React.Fragment>
-        <h2 className="orange-text text-darken-2">Last Orders</h2>
+        <h2 className="orange-text text-darken-2">Last Orders <Icon medium>shopping_cart</Icon></h2>
         <Table centered={true}>
           <thead>
             <tr>
+              <th></th>
               <th data-field="customer">Ordered by</th>
               <th data-field="total">Total</th>
               <th data-field="status">Status</th>

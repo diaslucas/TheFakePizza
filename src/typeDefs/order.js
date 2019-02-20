@@ -28,12 +28,13 @@ type Order {
   id: ID!
   pizzas: [PizzaOrder!]!
   customer: String!
+  customerPhotoURL: String!
   total: Float!
   status: String!
 }
 
 extend type Mutation {
-  addOrder(pizzas: [PizzaInput!]!, customer: String!, status: String!): Order
+  addOrder(pizzas: [PizzaInput!]!, customer: String!, customerPhotoURL: String!, status: String!): Order
 }
 
 `

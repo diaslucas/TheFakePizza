@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Container, Table } from 'react-materialize'
+import { Container, Table, Row, Col, Icon } from 'react-materialize'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import Row from 'react-materialize/lib/Row';
-import Col from 'react-materialize/lib/Col';
 
 const Pizzas = () => (
   <Query
@@ -37,7 +35,7 @@ export default class Menu extends Component {
       <Container>
         <Row>
           <Col m={6} s={12}>
-            <h2 className="orange-text text-darken-2">Menu</h2>
+            <h2 className="orange-text text-darken-2">Menu <Icon medium>local_pizza</Icon> </h2>
             <Table>
               <thead>
                 <tr>

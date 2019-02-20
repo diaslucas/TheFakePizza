@@ -10,6 +10,7 @@ export default class AppNavBar extends Component {
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li><Link to="/AllOrders">All Orders</Link></li>
             <li><Link to="/Menu">Menu</Link></li>
+            <li><Link to="/Commands">Commands</Link></li>
           </ul>
         </div>
       </nav>
