@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
 extend type Query {
   order(id: ID!): Order
-  orders: [Order!]!
+  orders(lastOrders: Boolean): [Order!]!
   popularChoices: [PopularChoices]
 }
 
@@ -31,6 +31,7 @@ type Order {
   customerPhotoURL: String!
   total: Float!
   status: String!
+  createdAt: String!
 }
 
 extend type Mutation {

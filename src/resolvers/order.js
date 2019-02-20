@@ -4,7 +4,10 @@ import { UserInputError } from 'apollo-server-express'
 
 export default {
   Query: {
-    orders: (root, arg, context, info) => {
+    orders: (root, args, context, info) => {
+      if(args.lastOrders === true) {
+        return Order.find({}).sort([["createdAt", "DESC"]]).limit(5)
+      }
       return Order.find({})
     },
     order: (root, { id }, context, info) => { 

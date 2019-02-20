@@ -7,7 +7,7 @@ const Orders = () => (
   <Query
     query={gql`
     {
-      orders {
+      orders(lastOrders: true) {
         id,
         pizzas {
           flavor,
@@ -23,7 +23,7 @@ const Orders = () => (
   >
     {({ loading, error, data }) => {
       if (loading) return <tr><td>Loading...</td></tr>;
-      if (error) return <tr><td>Error :(</td></tr>;
+      if (error) return <tr><td>Error :( {error.message}</td></tr>;
       var statusClass = '';
 
       return data.orders.map(({ id, total, customer, customerPhotoURL, status  }) => (
