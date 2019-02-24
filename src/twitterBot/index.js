@@ -67,7 +67,7 @@ export default () => {
             total: orderTotal
           }
           Order.create(newOrder);
-          replyText = 'Thank you! Your order was placed.';
+          replyText = 'Thank you! Your order has been placed.';
         }
       } else if(text.toLowerCase().indexOf('menu') > -1) {
         replyText = `Here is our menu ${URL}/menu`;

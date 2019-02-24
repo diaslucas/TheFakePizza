@@ -36,17 +36,19 @@ export default class Menu extends Component {
         <Row>
           <Col m={6} s={12}>
             <h2 className="orange-text text-darken-2">Menu <Icon medium>local_pizza</Icon> </h2>
-            <Table>
-              <thead>
-                <tr>
-                  <th data-field="id">Pizza</th>
-                  <th data-field="price">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <Pizzas />
-              </tbody>
-            </Table>
+            <div style={{ maxHeight: "350px", overflow: "auto" }}>
+              <Table>
+                <thead>
+                  <tr>
+                    <th data-field="id">Pizza</th>
+                    <th data-field="price">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <Pizzas />
+                </tbody>
+              </Table>
+            </div>
           </Col>
         </Row>
       </Container>

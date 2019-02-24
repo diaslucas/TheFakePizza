@@ -34,7 +34,7 @@ export default {
       }
       ]
 
-      return await Order.aggregate(aggregatorOpts).exec().then((pizzas) => pizzas)
+      return await Order.aggregate(aggregatorOpts).limit(5).exec().then((pizzas) => pizzas)
     },
   },
   Mutation: {

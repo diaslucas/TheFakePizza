@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import typeDefs from './src/typeDefs'
 import resolvers from './src/resolvers'
 import twitterBot from './src/twitterBot'
+import updatePendingOrders from './src/updatePendingOrders'
 import { DB, APP_PORT, IN_PROD } from './src/config'
 
 const app = express()
@@ -15,6 +16,8 @@ mongoose.connect(
 )
 
 twitterBot()
+
+updatePendingOrders()
 
 app.disable('x-powered-by')
 

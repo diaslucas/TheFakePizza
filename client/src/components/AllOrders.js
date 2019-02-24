@@ -24,11 +24,9 @@ const Orders = () => (
     {({ loading, error, data }) => {
       if (loading) return <tr><td>Loading...</td></tr>;
       if (error) return <tr><td>Error :( {error.message}</td></tr>;
-      var statusClass = '';
-
       return data.orders.map(({ id, total, customer, customerPhotoURL, status }) => (
         <tr key={id}>
-          <td><img src={customerPhotoURL} className="circle responsive-img" /></td>
+          <td><img alt="Twitter User" src={customerPhotoURL} className="circle responsive-img" /></td>
           <td>{customer}</td>
           <td>${total}</td>
           <td className={(status === 'Pending' ? 'light-blue-text' : 'light-green-text')}
