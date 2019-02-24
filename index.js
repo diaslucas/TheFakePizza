@@ -5,12 +5,13 @@ import typeDefs from './src/typeDefs'
 import resolvers from './src/resolvers'
 import twitterBot from './src/twitterBot'
 import updatePendingOrders from './src/updatePendingOrders'
-import { DB, APP_PORT, IN_PROD } from './src/configProd'
+// import { DB, PORT, IN_PROD } from './src/config'
+
 
 const app = express()
 
 mongoose.connect(
-  DB,
+  process.env.DB || DB,
   { useNewUrlParser: true }
 )
 
@@ -29,7 +30,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({app})
 
-const port = APP_PORT
+const port = process.env.PORT || PORT
 
 app.listen({ port }, () =>
   console.log(`http://localhost:${port}${server.graphqlPath}`)
