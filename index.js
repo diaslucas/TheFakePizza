@@ -9,12 +9,14 @@ import { DB, APP_PORT, IN_PROD } from './src/config'
 
 const app = express()
 
-// Initializing Bot
+const db = process.env.DB || DB
+
 mongoose.connect(
-  process.env.DB || DB,
+  db,
   { useNewUrlParser: true }
 )
 
+// Initializing Bot
 twitterBot()
 
 updatePendingOrders()
