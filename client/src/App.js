@@ -11,7 +11,7 @@ import Menu from './components/Menu';
 import Commands from './components/Commands';
 
 const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql"
+  uri: "/graphql"
 });
 
 class App extends Component {
