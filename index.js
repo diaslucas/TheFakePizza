@@ -5,13 +5,13 @@ import typeDefs from './src/typeDefs'
 import resolvers from './src/resolvers'
 import twitterBot from './src/twitterBot'
 import updatePendingOrders from './src/updatePendingOrders'
-// import { DB, PORT, IN_PROD } from './src/config'
 
+const IN_PROD = process.env.NODE_ENV === 'production'
 
 const app = express()
 
 mongoose.connect(
-  process.env.DB || DB,
+  process.env.DB || require('./src/config').DB,
   { useNewUrlParser: true }
 )
 
@@ -25,12 +25,12 @@ app.disable('x-powered-by')
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: false
+  playground: !IN_PROD
 })
 
 server.applyMiddleware({app})
 
-if(process.env.NODE_ENV === 'production'){
+if(IN_PROD){
   // Set static folder
   app.use(express.static('client/build'))
 
@@ -40,7 +40,7 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 
-const port = process.env.PORT || PORT
+const port = process.env.PORT || require('./src/config').PORT
 
 app.listen({ port }, () =>
   console.log(`http://localhost:${port}${server.graphqlPath}`)

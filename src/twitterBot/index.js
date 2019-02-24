@@ -1,17 +1,13 @@
 import Twit from 'twit'
-// import {
-//   TWITTER_CONSUMER_KEY,
-//   TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET, URL
-// } from '../config'
 import Order from '../models/order'
 import Pizza from '../models/pizza'
 export default () => {
 
   var T = new Twit({
-    consumer_key: process.env.TWITTER_CONSUMER_KEY || TWITTER_CONSUMER_KEY,
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || TWITTER_CONSUMER_SECRET,
-    access_token: process.env.TWITTER_ACCESS_TOKEN || TWITTER_ACCESS_TOKEN,
-    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET || TWITTER_ACCESS_TOKEN_SECRET,
+    consumer_key: process.env.TWITTER_CONSUMER_KEY || require('../config').TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || require('../config').TWITTER_CONSUMER_SECRET,
+    access_token: process.env.TWITTER_ACCESS_TOKEN || require('../config').TWITTER_ACCESS_TOKEN,
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET || require('../config').TWITTER_ACCESS_TOKEN_SECRET,
     timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
     strictSSL: true,     // optional - requires SSL certificates to be valid.
   })
@@ -70,9 +66,9 @@ export default () => {
           replyText = 'Thank you! Your order has been placed.';
         }
       } else if(text.toLowerCase().indexOf('menu') > -1) {
-        replyText = `Here is our menu ${process.env.URL || URL}/menu`;
+        replyText = `Here is our menu ${process.env.URL || require('../config').URL}/menu`;
       } else {
-        replyText = `Sorry! This is not a valid command. You can check our command list here ${process.env.URL || URL}/commands`
+        replyText = `Sorry! This is not a valid command. You can check our command list here ${process.env.URL || require('../config').URL}/commands`
       }
 
     } else {
