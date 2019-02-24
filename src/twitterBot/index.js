@@ -8,10 +8,10 @@ import Pizza from '../models/pizza'
 export default () => {
 
   var T = new Twit({
-    consumer_key: TWITTER_CONSUMER_KEY,
-    consumer_secret: TWITTER_CONSUMER_SECRET,
-    access_token: TWITTER_ACCESS_TOKEN,
-    access_token_secret: TWITTER_ACCESS_TOKEN_SECRET,
+    consumer_key: node.env.TWITTER_CONSUMER_KEY || TWITTER_CONSUMER_KEY,
+    consumer_secret: node.env.TWITTER_CONSUMER_SECRET || TWITTER_CONSUMER_SECRET,
+    access_token: node.env.TWITTER_ACCESS_TOKEN || TWITTER_ACCESS_TOKEN,
+    access_token_secret: node.env.TWITTER_ACCESS_TOKEN_SECRET || TWITTER_ACCESS_TOKEN_SECRET,
     timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
     strictSSL: true,     // optional - requires SSL certificates to be valid.
   })
@@ -70,9 +70,9 @@ export default () => {
           replyText = 'Thank you! Your order has been placed.';
         }
       } else if(text.toLowerCase().indexOf('menu') > -1) {
-        replyText = `Here is our menu ${URL}/menu`;
+        replyText = `Here is our menu ${node.env.URL || URL}/menu`;
       } else {
-        replyText = `Sorry! This is not a valid command. You can check our command list here ${URL}/commands`
+        replyText = `Sorry! This is not a valid command. You can check our command list here ${node.env.URL || URL}/commands`
       }
 
     } else {

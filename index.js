@@ -11,7 +11,7 @@ const app = express()
 
 // Initializing Bot
 mongoose.connect(
-  DB,
+  node.env.DB || DB,
   { useNewUrlParser: true }
 )
 
@@ -24,11 +24,11 @@ app.disable('x-powered-by')
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: !IN_PROD
+  playground: (node.env.environment === "production") || !IN_PROD
 })
 
 server.applyMiddleware({app})
 
-app.listen({ port: APP_PORT }, () =>
+app.listen({ port: node.env.PORT || APP_PORT }, () =>
   console.log(`http://localhost:${APP_PORT}${server.graphqlPath}`)
 )
