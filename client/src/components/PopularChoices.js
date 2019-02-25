@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Icon } from 'react-materialize'
+import { Table, Icon, Preloader } from 'react-materialize'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
@@ -15,7 +15,7 @@ const CommonPizzas = () => (
     `}
   >
     {({ loading, error, data }) => {
-      if (loading) return <tr><td>Loading...</td></tr>;
+      if (loading) return <tr><td colSpan={2} className="center-align"><Preloader flashing/></td></tr>;
       if (error) return <tr><td>Error :(</td></tr>;
 
       return data.popularChoices.map(({ _id, count }) => (

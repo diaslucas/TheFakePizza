@@ -6,6 +6,7 @@ export default class AppNavBar extends Component {
   render() {
     return (
       <Navbar brand='thefakepizza' className="orange darken-2" right>
+        <li><Link to="/">Home</Link></li>
         <li><Link to="/AllOrders">All Orders</Link></li>
         <li><Link to="/Menu">Menu</Link></li>
         <li><Link to="/Commands">Commands</Link></li>

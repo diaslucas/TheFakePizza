@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Table, Icon } from 'react-materialize'
+import { Container, Row, Col, Table, Icon, Preloader } from 'react-materialize'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
@@ -22,7 +22,7 @@ const Orders = () => (
     `}
   >
     {({ loading, error, data }) => {
-      if (loading) return <tr><td>Loading...</td></tr>;
+      if (loading) return <tr><td colSpan={4} className="center-align"><Preloader flashing/></td></tr>;
       if (error) return <tr><td>Error :( {error.message}</td></tr>;
       return data.orders.map(({ id, total, customer, customerPhotoURL, status }) => (
         <tr key={id}>

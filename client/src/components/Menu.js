@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Table, Row, Col, Icon } from 'react-materialize'
+import { Container, Table, Row, Col, Icon, Preloader } from 'react-materialize'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
@@ -16,7 +16,7 @@ const Pizzas = () => (
     `}
   >
     {({ loading, error, data }) => {
-      if (loading) return <tr><td>Loading...</td></tr>;
+      if (loading) return <tr><td colSpan={2} className="center-align"><Preloader flashing/></td></tr>;
       if (error) return <tr><td>Error :(</td></tr>;
 
       return data.pizzas.map(({ id, flavor, price }) => (
